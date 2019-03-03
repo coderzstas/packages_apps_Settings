@@ -46,13 +46,13 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
         String buildtype = SystemProperties.get(OTA_BUILD_TYPE_PROP,"unofficial");
         String deviceName = SystemProperties.get(DEVICE_NAME,"");
         if (deviceName.startsWith("phhgsi_") || !mUm.isAdminUser() || !buildtype.equalsIgnoreCase("official")){
-            return UNSUPPORTED_ON_DEVICE;
+            return AVAILABLE;
         }
         try {
             PackageManager pm = mContext.getPackageManager();
             pm.getPackageInfo(OTA_APP_PACKAGE, PackageManager.GET_ACTIVITIES);
         } catch (Exception e) {
-            return UNSUPPORTED_ON_DEVICE;
+            return AVAILABLE;
         }
         return AVAILABLE;
     }
